@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кликер + Сундуки - Финальная Версия</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@adstxt/adsggram.js@latest"></script>
     <style>
         * {
             margin: 0;
@@ -339,6 +340,95 @@
         .chest-reward {
             font-size: 12px;
             opacity: 0.8;
+        }
+
+        /* Язык */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 16px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Реклама */
+        .ad-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .ad-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .ad-button {
+            background: linear-gradient(145deg, #FF6B6B, #FF8E53);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .ad-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .ad-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .ad-counter {
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .ad-reward {
+            text-align: center;
+            color: #FFD700;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .ad-container {
+            margin-top: 15px;
+            min-height: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
         }
 
         /* Рефералы */
@@ -684,6 +774,9 @@
 </head>
 <body>
     <div id="app">
+        <!-- Кнопка переключения языка -->
+        <button class="language-switcher" id="languageBtn">EN</button>
+        
         <!-- Главный экран -->
         <div id=" mainScreen" class="screen active">
             <div class="balance-display">
@@ -703,7 +796,19 @@
         <!-- Экран магазина -->
         <div id="shopScreen" class="screen">
             <div class="shop-container">
-                <h3 class="section-title">🛍️ Улучшения</h3>
+                <h3 class="section-title" data-text="shop-title">🛍️ Улучшения</h3>
+                
+                <!-- Секция рекламы -->
+                <div class="ad-section">
+                    <div class="ad-title" data-text="ad-title">📺 Заработай на рекламе</div>
+                    <div class="ad-reward" data-text="ad-reward">+50 💰 за просмотр</div>
+                    <div class="ad-counter" data-text="ad-counter">Просмотрено сегодня: <span id="adsWatched">0</span>/5</div>
+                    <button class="ad-button" id="watchAdBtn" data-text="watch-ad">📺 Смотреть рекламу</button>
+                    <div class="ad-container" id="adContainer">
+                        <span data-text="ad-placeholder">Реклама загрузится здесь</span>
+                    </div>
+                </div>
+                
                 <div class="shop-grid">
                     <div class="shop-item" data-upgrade="clickPower">
                         <div class="shop-icon">💪</div>
@@ -909,6 +1014,110 @@ class FinalGame {
         this.totalEarned = 0;
         this.referrals = [];
         this.referralEarnings = 0;
+        this.adsWatched = 0;
+        this.lastAdReset = Date.now();
+        this.currentLanguage = 'ru';
+        
+        this.translations = {
+            ru: {
+                'shop-title': ' Улучшения',
+                'ad-title': ' Заработай на рекламе',
+                'ad-reward': '+50  за просмотр',
+                'ad-counter': 'Просмотрено сегодня: ',
+                'watch-ad': ' Смотреть рекламу',
+                'ad-placeholder': 'Реклама загрузится здесь',
+                'referral-title': ' Пригласи друзей!',
+                'referral-bonus': '1000  за каждого друга',
+                'copy-link': ' Копировать',
+                'invite-friends': ' Пригласить друзей',
+                'profile-title': ' Профиль',
+                'game-title': ' Игра',
+                'shop-nav': ' Магазин',
+                'referral-nav': ' Рефералы',
+                'profile-nav': ' Профиль',
+                'click-power-text': 'Сила клика: ',
+                'auto-clicker-text': 'Автокликер: ',
+                'per-sec': ' /сек',
+                'level': 'Уровень: ',
+                'cost': 'Стоимость: ',
+                'effect-click': '+1 к силе клика',
+                'effect-auto': '+1 /сек',
+                'effect-mult-click': 'x2 к силе клика',
+                'effect-mult-auto': 'x2 к автокликеру',
+                'common': 'Обычный',
+                'rare': 'Редкий',
+                'epic': 'Эпический',
+                'legendary': 'Легендарный',
+                'ultra': 'Ультра Легенда',
+                'invited': 'Приглашено:',
+                'earned': 'Заработано:',
+                'balance': 'Баланс',
+                'total-clicks': 'Всего кликов',
+                'chests-opened': 'Сундуков открыто',
+                'total-earned': 'Общая награда',
+                'back': 'Назад',
+                'chest-opened': ' Поздравляем!',
+                'claim-reward': 'Забрать награду',
+                'not-enough-coins': 'Недостаточно монет!',
+                'upgrade-purchased': 'Улучшение куплено!',
+                'link-copied': 'Ссылка скопирована!',
+                'invite-error': 'Ошибка приглашения друзей',
+                'copy-error': 'Ошибка копирования ссылки',
+                'ad-loading': 'Реклама загружается...',
+                'ad-watched': 'Реклама просмотрена! +50 ',
+                'ad-limit': 'Лимит рекламы на сегодня исчерпан!',
+                'referral-bonus-received': 'Вы получили реферальный бонус 1000 !'
+            },
+            en: {
+                'shop-title': ' Upgrades',
+                'ad-title': ' Earn from Ads',
+                'ad-reward': '+50  per view',
+                'ad-counter': 'Watched today: ',
+                'watch-ad': ' Watch Ad',
+                'ad-placeholder': 'Ad will load here',
+                'referral-title': ' Invite Friends!',
+                'referral-bonus': '1000  per friend',
+                'copy-link': ' Copy',
+                'invite-friends': ' Invite Friends',
+                'profile-title': ' Profile',
+                'game-title': ' Game',
+                'shop-nav': ' Shop',
+                'referral-nav': ' Referrals',
+                'profile-nav': ' Profile',
+                'click-power-text': 'Click Power: ',
+                'auto-clicker-text': 'Auto Clicker: ',
+                'per-sec': ' /sec',
+                'level': 'Level: ',
+                'cost': 'Cost: ',
+                'effect-click': '+1 to click power',
+                'effect-auto': '+1 /sec',
+                'effect-mult-click': 'x2 to click power',
+                'effect-mult-auto': 'x2 to auto clicker',
+                'common': 'Common',
+                'rare': 'Rare',
+                'epic': 'Epic',
+                'legendary': 'Legendary',
+                'ultra': 'Ultra Legend',
+                'invited': 'Invited:',
+                'earned': 'Earned:',
+                'balance': 'Balance',
+                'total-clicks': 'Total Clicks',
+                'chests-opened': 'Chests Opened',
+                'total-earned': 'Total Earned',
+                'back': 'Back',
+                'chest-opened': ' Congratulations!',
+                'claim-reward': 'Claim Reward',
+                'not-enough-coins': 'Not enough coins!',
+                'upgrade-purchased': 'Upgrade purchased!',
+                'link-copied': 'Link copied!',
+                'invite-error': 'Error inviting friends',
+                'copy-error': 'Error copying link',
+                'ad-loading': 'Ad loading...',
+                'ad-watched': 'Ad watched! +50 ',
+                'ad-limit': 'Daily ad limit reached!',
+                'referral-bonus-received': 'You received referral bonus 1000 !'
+            }
+        };
         
         this.userData = {
             id: Math.floor(Math.random() * 1000000),
@@ -928,7 +1137,10 @@ class FinalGame {
             totalOpened: 0,
             totalEarned: 0,
             referrals: [],
-            referralEarnings: 0
+            referralEarnings: 0,
+            adsWatched: 0,
+            lastAdReset: Date.now(),
+            language: 'ru'
         };
         
         this.chests = {
@@ -950,13 +1162,20 @@ class FinalGame {
     }
     
     init() {
-        this.loadUserData();
-        this.initTelegramApp();
-        this.setupEventListeners();
-        this.updateUI();
-        this.startAutoSave();
-        this.startAutoClicker();
-        this.checkReferral();
+        try {
+            this.loadUserData();
+            this.initTelegramApp();
+            this.setupEventListeners();
+            this.updateUI();
+            this.startAutoSave();
+            this.startAutoClicker();
+            this.checkReferral();
+            this.updateLanguage();
+            this.resetDailyAds();
+            console.log('Complete game initialized successfully');
+        } catch (error) {
+            console.error('Error initializing game:', error);
+        }
     }
     
     // Локальная база данных
@@ -1028,18 +1247,37 @@ class FinalGame {
     
     // Генерация реферальной ссылки
     generateReferralLink() {
-        const botUsername = '@ProjectNBot'; // Замените на имя вашего бота
+        const botUsername = 'ProjectNBot'; // Имя бота @ProjectNBot
         const referralLink = `https://t.me/${botUsername}?start=${this.userData.id}`;
         document.getElementById('referralLink').value = referralLink;
     }
     
     // Обновление интерфейса
     updateUI() {
-        document.getElementById('balance').textContent = Math.floor(this.balance);
-        document.getElementById('clickPower').textContent = this.clickPower * this.clickMultiplier;
-        document.getElementById('autoClicker').textContent = this.autoClicker * this.autoMultiplier;
-        
-        // Обновление улучшений
+        try {
+            const balanceEl = document.getElementById('balance');
+            const clickPowerEl = document.getElementById('clickPower');
+            const autoClickerEl = document.getElementById('autoClicker');
+            
+            if (balanceEl) balanceEl.textContent = Math.floor(this.balance);
+            if (clickPowerEl) clickPowerEl.textContent = this.clickPower * this.clickMultiplier;
+            if (autoClickerEl) autoClickerEl.textContent = this.autoClicker * this.autoMultiplier;
+            
+            // Обновление рекламы
+            const adsWatchedEl = document.getElementById('adsWatched');
+            if (adsWatchedEl) adsWatchedEl.textContent = this.adsWatched;
+            
+            const watchAdBtn = document.getElementById('watchAdBtn');
+            if (watchAdBtn) {
+                watchAdBtn.disabled = this.adsWatched >= 5;
+                if (this.adsWatched >= 5) {
+                    watchAdBtn.textContent = this.translations[this.currentLanguage]['ad-limit'];
+                } else {
+                    watchAdBtn.textContent = this.translations[this.currentLanguage]['watch-ad'];
+                }
+            }
+            
+            // Обновление улучшений
         document.getElementById('clickPowerLevel').textContent = this.upgrades.clickPower.level;
         document.getElementById('autoClickerLevel').textContent = this.upgrades.autoClicker.level;
         document.getElementById('clickMultiplierLevel').textContent = this.upgrades.clickMultiplier.level;
@@ -1399,19 +1637,45 @@ class FinalGame {
     
     // Установка обработчиков событий
     setupEventListeners() {
-        // Кликер
-        const mainCoin = document.getElementById('mainCoin');
-        mainCoin.addEventListener('click', (e) => {
-            this.clickCoin(e);
-        });
-        
-        // Улучшения
-        document.querySelectorAll('.shop-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const upgradeType = item.dataset.upgrade;
-                this.buyUpgrade(upgradeType);
+        try {
+            // Кликер
+            const mainCoin = document.getElementById('mainCoin');
+            if (mainCoin) {
+                mainCoin.addEventListener('click', (e) => {
+                    this.clickCoin(e);
+                });
+            }
+            
+            // Переключение языка
+            const languageBtn = document.getElementById('languageBtn');
+            if (languageBtn) {
+                languageBtn.addEventListener('click', () => {
+                    this.toggleLanguage();
+                });
+            }
+            
+            // Кнопка просмотра рекламы
+            const watchAdBtn = document.getElementById('watchAdBtn');
+            if (watchAdBtn) {
+                watchAdBtn.addEventListener('click', () => {
+                    this.watchAd();
+                });
+            }
+            
+            // Улучшения
+            document.querySelectorAll('.shop-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const upgradeType = item.dataset.upgrade;
+                    this.buyUpgrade(upgradeType);
+                });
             });
-        });
+            
+            // Сундуки
+            document.querySelectorAll('.chest-2d').forEach(chest => {
+                chest.addEventListener('click', () => {
+                    const rarity = chest.dataset.rarity;
+                    this.openChest(rarity);
+                });
         
         // Сундуки
         document.querySelectorAll('.chest-2d').forEach(chest => {
