@@ -656,6 +656,29 @@
             font-size: 12px;
         }
 
+        /* Язык в профиле */
+        .language-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-switcher {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .language-switcher:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         /* Экран профиля */
         .profile-container {
             background: rgba(255, 255, 255, 0.1);
@@ -774,9 +797,6 @@
 </head>
 <body>
     <div id="app">
-        <!-- Кнопка переключения языка -->
-        <button class="language-switcher" id="languageBtn">EN</button>
-        
         <!-- Главный экран -->
         <div id=" mainScreen" class="screen active">
             <div class="balance-display">
@@ -930,6 +950,11 @@
         <!-- Экран профиля -->
         <div id="profileScreen" class="screen">
             <div class="profile-container">
+                <!-- Кнопка переключения языка -->
+                <div class="language-section">
+                    <button class="language-switcher" id="languageBtn">EN</button>
+                </div>
+                
                 <div class="profile-header">
                     <div class="profile-avatar" id="profileAvatar">👤</div>
                     <div class="profile-info">
@@ -1000,7 +1025,7 @@
         </div>
     </div>
     
-    <script>
+    <script type="module" language="javascript">
         // Финальная игра с магазином и сундуками
 class FinalGame {
     constructor() {
@@ -1020,28 +1045,28 @@ class FinalGame {
         
         this.translations = {
             ru: {
-                'shop-title': ' Улучшения',
-                'ad-title': ' Заработай на рекламе',
-                'ad-reward': '+50  за просмотр',
+                'shop-title': '🛍️ Улучшения',
+                'ad-title': '📺 Заработай на рекламе',
+                'ad-reward': '+50 💰 за просмотр',
                 'ad-counter': 'Просмотрено сегодня: ',
-                'watch-ad': ' Смотреть рекламу',
+                'watch-ad': '📺 Смотреть рекламу',
                 'ad-placeholder': 'Реклама загрузится здесь',
-                'referral-title': ' Пригласи друзей!',
-                'referral-bonus': '1000  за каждого друга',
-                'copy-link': ' Копировать',
-                'invite-friends': ' Пригласить друзей',
-                'profile-title': ' Профиль',
-                'game-title': ' Игра',
-                'shop-nav': ' Магазин',
-                'referral-nav': ' Рефералы',
-                'profile-nav': ' Профиль',
+                'referral-title': '👥 Пригласи друзей!',
+                'referral-bonus': '1000 💰 за каждого друга',
+                'copy-link': '📋 Копировать',
+                'invite-friends': '📱 Пригласить друзей',
+                'profile-title': '👤 Профиль',
+                'game-title': '🎮 Игра',
+                'shop-nav': '🛍️ Магазин',
+                'referral-nav': '👥 Рефералы',
+                'profile-nav': '👤 Профиль',
                 'click-power-text': 'Сила клика: ',
                 'auto-clicker-text': 'Автокликер: ',
-                'per-sec': ' /сек',
+                'per-sec': ' 💰/сек',
                 'level': 'Уровень: ',
                 'cost': 'Стоимость: ',
                 'effect-click': '+1 к силе клика',
-                'effect-auto': '+1 /сек',
+                'effect-auto': '+1 💰/сек',
                 'effect-mult-click': 'x2 к силе клика',
                 'effect-mult-auto': 'x2 к автокликеру',
                 'common': 'Обычный',
@@ -1056,7 +1081,7 @@ class FinalGame {
                 'chests-opened': 'Сундуков открыто',
                 'total-earned': 'Общая награда',
                 'back': 'Назад',
-                'chest-opened': ' Поздравляем!',
+                'chest-opened': '🎉 Поздравляем!',
                 'claim-reward': 'Забрать награду',
                 'not-enough-coins': 'Недостаточно монет!',
                 'upgrade-purchased': 'Улучшение куплено!',
@@ -1064,33 +1089,34 @@ class FinalGame {
                 'invite-error': 'Ошибка приглашения друзей',
                 'copy-error': 'Ошибка копирования ссылки',
                 'ad-loading': 'Реклама загружается...',
-                'ad-watched': 'Реклама просмотрена! +50 ',
+                'ad-watched': 'Реклама просмотрена! +50 💰',
                 'ad-limit': 'Лимит рекламы на сегодня исчерпан!',
-                'referral-bonus-received': 'Вы получили реферальный бонус 1000 !'
+                'referral-bonus-received': 'Вы получили реферальный бонус 1000 💰!',
+                'language-changed': 'Язык изменен'
             },
             en: {
-                'shop-title': ' Upgrades',
-                'ad-title': ' Earn from Ads',
-                'ad-reward': '+50  per view',
+                'shop-title': '🛍️ Upgrades',
+                'ad-title': '📺 Earn from Ads',
+                'ad-reward': '+50 💰 per view',
                 'ad-counter': 'Watched today: ',
-                'watch-ad': ' Watch Ad',
+                'watch-ad': '📺 Watch Ad',
                 'ad-placeholder': 'Ad will load here',
-                'referral-title': ' Invite Friends!',
-                'referral-bonus': '1000  per friend',
-                'copy-link': ' Copy',
-                'invite-friends': ' Invite Friends',
-                'profile-title': ' Profile',
-                'game-title': ' Game',
-                'shop-nav': ' Shop',
-                'referral-nav': ' Referrals',
-                'profile-nav': ' Profile',
+                'referral-title': '👥 Invite Friends!',
+                'referral-bonus': '1000 💰 per friend',
+                'copy-link': '📋 Copy',
+                'invite-friends': '📱 Invite Friends',
+                'profile-title': '👤 Profile',
+                'game-title': '🎮 Game',
+                'shop-nav': '🛍️ Shop',
+                'referral-nav': '👥 Referrals',
+                'profile-nav': '👤 Profile',
                 'click-power-text': 'Click Power: ',
                 'auto-clicker-text': 'Auto Clicker: ',
-                'per-sec': ' /sec',
+                'per-sec': ' 💰/sec',
                 'level': 'Level: ',
                 'cost': 'Cost: ',
                 'effect-click': '+1 to click power',
-                'effect-auto': '+1 /sec',
+                'effect-auto': '+1 💰/sec',
                 'effect-mult-click': 'x2 to click power',
                 'effect-mult-auto': 'x2 to auto clicker',
                 'common': 'Common',
@@ -1105,7 +1131,7 @@ class FinalGame {
                 'chests-opened': 'Chests Opened',
                 'total-earned': 'Total Earned',
                 'back': 'Back',
-                'chest-opened': ' Congratulations!',
+                'chest-opened': '🎉 Congratulations!',
                 'claim-reward': 'Claim Reward',
                 'not-enough-coins': 'Not enough coins!',
                 'upgrade-purchased': 'Upgrade purchased!',
@@ -1113,9 +1139,10 @@ class FinalGame {
                 'invite-error': 'Error inviting friends',
                 'copy-error': 'Error copying link',
                 'ad-loading': 'Ad loading...',
-                'ad-watched': 'Ad watched! +50 ',
+                'ad-watched': 'Ad watched! +50 💰',
                 'ad-limit': 'Daily ad limit reached!',
-                'referral-bonus-received': 'You received referral bonus 1000 !'
+                'referral-bonus-received': 'You received referral bonus 1000 💰!',
+                'language-changed': 'Language changed'
             }
         };
         
@@ -1175,6 +1202,140 @@ class FinalGame {
             console.log('Complete game initialized successfully');
         } catch (error) {
             console.error('Error initializing game:', error);
+        }
+    }
+    
+    // Переключение языка
+    toggleLanguage() {
+        try {
+            this.currentLanguage = this.currentLanguage === 'ru' ? 'en' : 'ru';
+            this.userData.language = this.currentLanguage;
+            this.saveUserData();
+            this.updateLanguage();
+            this.showNotification(this.translations[this.currentLanguage]['language-changed']);
+        } catch (error) {
+            console.error('Error toggling language:', error);
+        }
+    }
+    
+    // Обновление языка интерфейса
+    updateLanguage() {
+        try {
+            const elements = document.querySelectorAll('[data-text]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-text');
+                if (this.translations[this.currentLanguage][key]) {
+                    element.textContent = this.translations[this.currentLanguage][key];
+                }
+            });
+            
+            // Обновляем кнопку языка
+            const langBtn = document.getElementById('languageBtn');
+            if (langBtn) {
+                langBtn.textContent = this.currentLanguage === 'ru' ? 'EN' : 'RU';
+            }
+            
+            // Обновляем навигацию
+            this.updateNavigationText();
+        } catch (error) {
+            console.error('Error updating language:', error);
+        }
+    }
+    
+    // Обновление текста навигации
+    updateNavigationText() {
+        try {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const texts = ['game-title', 'shop-nav', 'referral-nav', 'profile-nav'];
+            
+            navButtons.forEach((btn, index) => {
+                if (texts[index] && this.translations[this.currentLanguage][texts[index]]) {
+                    const textElement = btn.querySelector('.nav-text');
+                    if (textElement) {
+                        textElement.textContent = this.translations[this.currentLanguage][texts[index]];
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error updating navigation text:', error);
+        }
+    }
+    
+    // Сброс ежедневных реклам
+    resetDailyAds() {
+        try {
+            const today = new Date().toDateString();
+            const lastReset = new Date(this.userData.lastAdReset).toDateString();
+            
+            if (today !== lastReset) {
+                this.userData.adsWatched = 0;
+                this.userData.lastAdReset = Date.now();
+                this.adsWatched = 0;
+                this.lastAdReset = Date.now();
+                this.saveUserData();
+            }
+        } catch (error) {
+            console.error('Error resetting daily ads:', error);
+        }
+    }
+    
+    // Просмотр рекламы
+    watchAd() {
+        try {
+            this.resetDailyAds();
+            
+            if (this.adsWatched >= 5) {
+                this.showNotification(this.translations[this.currentLanguage]['ad-limit']);
+                return;
+            }
+            
+            const adBtn = document.getElementById('watchAdBtn');
+            const adContainer = document.getElementById('adContainer');
+            
+            if (adBtn) {
+                adBtn.disabled = true;
+                adBtn.textContent = this.translations[this.currentLanguage]['ad-loading'];
+            }
+            
+            // Имитация загрузки рекламы
+            if (adContainer) {
+                adContainer.innerHTML = '<div style="color: white;">📺 Loading ad...</div>';
+            }
+            
+            setTimeout(() => {
+                // Начисляем награду
+                this.balance += 50;
+                this.totalEarned += 50;
+                this.adsWatched++;
+                this.userData.balance = this.balance;
+                this.userData.totalEarned = this.totalEarned;
+                this.userData.adsWatched = this.adsWatched;
+                
+                this.saveUserData();
+                this.updateUI();
+                
+                // Показываем уведомление
+                this.showNotification(this.translations[this.currentLanguage]['ad-watched']);
+                
+                // Восстанавливаем кнопку
+                if (adBtn) {
+                    adBtn.disabled = false;
+                    adBtn.textContent = this.translations[this.currentLanguage]['watch-ad'];
+                }
+                
+                // Очищаем контейнер рекламы
+                if (adContainer) {
+                    adContainer.innerHTML = `<span data-text="ad-placeholder">${this.translations[this.currentLanguage]['ad-placeholder']}</span>`;
+                }
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Error watching ad:', error);
+            const adBtn = document.getElementById('watchAdBtn');
+            if (adBtn) {
+                adBtn.disabled = false;
+                adBtn.textContent = this.translations[this.currentLanguage]['watch-ad'];
+            }
         }
     }
     
@@ -1330,7 +1491,7 @@ class FinalGame {
         this.createClickEffect(event, clickValue);
     }
     
-    createClickEffect(event, value) {
+    createClickEffect(event, value) 
         const effect = document.createElement('div');
         effect.className = 'click-effect';
         effect.textContent = '+' + Math.floor(value);
@@ -1343,8 +1504,8 @@ class FinalGame {
         
         setTimeout(() => {
             effect.remove();
-        }, 1000);
-    }
+        }, 1000); 
+     }
     
     // Улучшения
     getUpgradeCost(type) {
@@ -1394,10 +1555,10 @@ class FinalGame {
         this.updateUI();
         
         this.showNotification('Улучшение куплено!');
-    }
+    
     
     // Автокликер
-    startAutoClicker() {
+    startAutoClicker() 
         setInterval(() => {
             if (this.autoClicker > 0) {
                 const autoValue = this.autoClicker * this.autoMultiplier;
@@ -1410,10 +1571,10 @@ class FinalGame {
                 this.updateUI();
             }
         }, 1000);
-    }
+    
     
     // Открытие сундука
-    openChest(rarity) {
+    openChest(rarity) 
         const chest = this.chests[rarity];
         
         if (this.balance < chest.cost) {
@@ -1450,24 +1611,24 @@ class FinalGame {
         
         // Вероятности: 70% - минимум, 25% - среднее, 5% - максимум
         const rand = Math.random();
-        let reward;
         
         if (rand < 0.7) {
             // 70% - минимальная награда (или чуть больше)
-            reward = chest.minReward + Math.floor(Math.random() * Math.floor(range * 0.2));
+            const reward = chest.minReward + Math.floor(Math.random() * Math.floor(range * 0.2));
+            return Math.min(reward, chest.maxReward);
         } else if (rand < 0.95) {
             // 25% - средняя награда
-            reward = chest.minReward + Math.floor(range * 0.3) + Math.floor(Math.random() * Math.floor(range * 0.4));
+            const reward = chest.minReward + Math.floor(range * 0.3) + Math.floor(Math.random() * Math.floor(range * 0.4));
+            return Math.min(reward, chest.maxReward);
         } else {
             // 5% - максимальная награда
-            reward = chest.minReward + Math.floor(range * 0.7) + Math.floor(Math.random() * Math.floor(range * 0.3));
+            const reward = chest.minReward + Math.floor(range * 0.7) + Math.floor(Math.random() * Math.floor(range * 0.3));
+            return Math.min(reward, chest.maxReward);
         }
-        
-        return Math.min(reward, chest.maxReward);
     }
     
     // Модальное окно сундука
-    showChestModal(rarity, reward) {
+    showChestModal(rarity, reward) 
         const modal = document.getElementById('chestModal');
         const chest = this.chests[rarity];
         
@@ -1486,7 +1647,7 @@ class FinalGame {
         }
         
         // Устанавливаем награду
-        document.getElementById('rewardAmount').textContent = '+' + Math.floor(reward) + ' 💰';
+        document.getElementById(Amount).textContent = '+' + Math.floor(reward) + ' 💰';
         
         // Показываем модальное окно
         modal.classList.add('active');
@@ -1505,7 +1666,7 @@ class FinalGame {
     }
     
     // Создание партиклей
-    createParticles(rarity) {
+    createParticles(rarity) 
         const colors = {
             common: ['#8B7355', '#A0826D'],
             rare: ['#1E90FF', '#4169E1'],
@@ -1568,7 +1729,7 @@ class FinalGame {
                 animate();
             }, i * 50);
         }
-    }
+    
     
     // Копирование реферальной ссылки
     copyReferralLink() {
@@ -1579,7 +1740,7 @@ class FinalGame {
     }
     
     // Приглашение друзей
-    inviteFriends() {
+    inviteFriends() 
         const referralLink = document.getElementById('referralLink').value;
         
         if (window.Telegram && window.Telegram.WebApp) {
@@ -1588,7 +1749,7 @@ class FinalGame {
             navigator.clipboard.writeText(referralLink);
             this.showNotification('Ссылка скопирована в буфер обмена!');
         }
-    }
+    
     
     // Показ уведомлений
     showNotification(message) {
@@ -1612,10 +1773,11 @@ class FinalGame {
         
         setTimeout(() => {
             notification.style.animation = 'slideUp 0.3s ease';
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
         }, 2000);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 2300);
     }
     
     // Навигация
@@ -1676,48 +1838,60 @@ class FinalGame {
                     const rarity = chest.dataset.rarity;
                     this.openChest(rarity);
                 });
-        
-        // Сундуки
-        document.querySelectorAll('.chest-2d').forEach(chest => {
-            chest.addEventListener('click', () => {
-                const rarity = chest.dataset.rarity;
-                this.openChest(rarity);
             });
-        });
-        
-        // Рефералы
-        document.getElementById('copyLink').addEventListener('click', () => {
-            this.copyReferralLink();
-        });
-        
-        document.getElementById('inviteFriends').addEventListener('click', () => {
-            this.inviteFriends();
-        });
-        
-        // Навигация
-        document.querySelectorAll('.nav-button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const screen = btn.dataset.screen;
-                this.showScreen(screen);
-            });
-        });
-        
-        // Кнопка назад в профиле
-        document.getElementById('backToMain').addEventListener('click', () => {
-            this.showScreen('main');
-        });
-        
-        // Закрытие модального окна
-        document.getElementById('closeModal').addEventListener('click', () => {
-            document.getElementById('chestModal').classList.remove('active');
-        });
-        
-        // Закрытие модального окна по клику вне его
-        document.getElementById('chestModal').addEventListener('click', (e) => {
-            if (e.target.id === 'chestModal') {
-                document.getElementById('chestModal').classList.remove('active');
+            
+            // Рефералы
+            const copyLinkBtn = document.getElementById('copyLink');
+            if (copyLinkBtn) {
+                copyLinkBtn.addEventListener('click', () => {
+                    this.copyReferralLink();
+                });
             }
-        });
+            
+            const inviteFriendsBtn = document.getElementById('inviteFriends');
+            if (inviteFriendsBtn) {
+                inviteFriendsBtn.addEventListener('click', () => {
+                    this.inviteFriends();
+                });
+            }
+            
+            // Навигация
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const screen = btn.dataset.screen;
+                    this.showScreen(screen);
+                });
+            });
+            
+            // Кнопка назад в профиле
+            const backToMainBtn = document.getElementById('backToMain');
+            if (backToMainBtn) {
+                backToMainBtn.addEventListener('click', () => {
+                    this.showScreen('main');
+                });
+            }
+            
+            // Закрытие модального окна
+            const closeModalBtn = document.getElementById('closeModal');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    const modal = document.getElementById('chestModal');
+                    if (modal) modal.classList.remove('active');
+                });
+            }
+            
+            // Закрытие модального окна по клику вне его
+            const modal = document.getElementById('chestModal');
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target.id === 'chestModal') {
+                        modal.classList.remove('active');
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Error setting up event listeners:', error);
+        }
     }
     
     // Автосохранение
